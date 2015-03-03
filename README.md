@@ -12,3 +12,4 @@ Also, there may appear a 3D versions of some of these codes someday.
 Finally, parallel versions either in CUDA/OpenCL/GLSL. 
 
 I would gladly accept suggestions/contributions to make the code more clearer or to add interesting features.
+Also, changes to access control or redundant static variables or methods Identified please send me a notice.
