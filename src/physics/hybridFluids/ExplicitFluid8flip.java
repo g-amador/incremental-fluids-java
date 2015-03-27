@@ -102,9 +102,7 @@ class ExplicitFluid8flip {
                 log.log(SEVERE, null, ex);
             }
 
-            for (A_SolidBody body : bodies) {
-                body.update(timestep);
-            }
+            bodies.forEach(body -> body.update(timestep));
         }
     }
 
@@ -316,7 +314,8 @@ class ExplicitFluid8flip {
                 return;
             }
 
-            double k = (1.0 - abs((float) ix - x)) * (1.0 - abs((float) iy - y));
+            //double k = (1.0 - abs((float) ix - x)) * (1.0 - abs((float) iy - y));
+            double k = (1.0 - abs(ix - x)) * (1.0 - abs(iy - y));
             weight[ix + iy * _w] += k;
             _src[ix + iy * _w] += k * value;
         }
@@ -1562,13 +1561,8 @@ class ExplicitFluid8flip {
          * Helper function returning true if a position is inside a solid body
          */
         private boolean pointInBody(double x, double y) {
-            for (A_SolidBody _body : _bodies) {
-                if (_body.distance(x * _hx, y * _hx) < 0.0) {
-                    return true;
-                }
-            }
-
-            return false;
+            return _bodies.stream()
+                    .anyMatch(_body -> _body.distance(x * _hx, y * _hx) < 0.0);
         }
 
         /**

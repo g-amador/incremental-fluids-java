@@ -98,9 +98,7 @@ class ExplicitFluid5curvedBoundaries {
                 log.log(SEVERE, null, ex);
             }
 
-            for (A_SolidBody body : bodies) {
-                body.update(timestep);
-            }
+            bodies.forEach(body -> body.update(timestep));
         }
     }
 
